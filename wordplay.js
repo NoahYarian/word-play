@@ -121,13 +121,25 @@ const findAnagrams = (wordList) => {
 
 // which words have the most anagrams?
 
-let mostAnagrams = 0;
-let winningAnagrams = [];
-for (let wordlist in wordlists) {
-  let anagrams = findAnagrams(wordlists[wordlist]);
-  for (let i = 0; i < anagrams.length; i++) {
-    if (anagrams[i].length > mostAnagrams) mostAnagrams = anagrams[i].length;
-    if (anagrams[i].length > 9) winningAnagrams.push(anagrams[i]);
+const findWordsWithMostAnagrams = () => {
+  let mostAnagrams = 0;
+  let winningAnagrams = [];
+  for (let wordlist in wordlists) {
+    let anagrams = findAnagrams(DICTIONARY[wordlist]);
+    for (let i = 0; i < anagrams.length; i++) {
+      if (anagrams[i].length > mostAnagrams) mostAnagrams = anagrams[i].length;
+      if (anagrams[i].length > 9) winningAnagrams.push(anagrams[i]);
+    }
   }
+  return winningAnagrams;
 }
-console.log(winningAnagrams);
+
+const getWaysOfRemovingOneLetterFromWord = (word) => {
+  let ways = [];
+  for (let i = 0; i < word.length; i++) {
+    let str = word.split('');
+    str.splice(i,1);
+    ways.push(str.join(''));
+  }
+  return ways;
+}
